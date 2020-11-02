@@ -1,0 +1,285 @@
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and export to LaTeX again.
+
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{epstopdf}
+\usepackage[table]{xcolor}
+\usepackage{matlab}
+
+\sloppy
+\epstopdfsetup{outdir=./}
+\graphicspath{ {./OlympicAnalysis_hidden_images/} }
+
+\begin{document}
+
+\matlabtitle{Does GDP Affect a Country's Olympic Success?}
+
+\begin{par}
+\begin{flushleft}
+In this example, we'll look at the relationship between a country's gross domestic product (GDP) and its Olympic success.  We will use data from the Summer 2016 games in this example.
+\end{flushleft}
+\end{par}
+
+
+\matlabheading{Read Medals Data}
+
+\begin{par}
+\begin{flushleft}
+We'll start by reading the medals won by each country from an Excel file.  We can plot these values on a geobubble chart where the size of the bubble indicates the number of medals won by that country.  We can see that the United States, China, Russia, and the United Kingdom did quite well.
+\end{flushleft}
+\end{par}
+
+\begin{center}
+\includegraphics[width=\maxwidth{101.15403913697943em}]{figure_0.eps}
+\end{center}
+
+\matlabheading{Read GDP data}
+
+\begin{par}
+\begin{flushleft}
+Read the data for the country's gross domestic product (GDP) from an Excel file.
+\end{flushleft}
+\end{par}
+
+\begin{matlabtableoutput}
+{
+\begin{tabular} {|c|c|c|c|}\hline
+\mlcell{ } & \mlcell{Index} & \mlcell{Country} & \mlcell{GDP} \\ \hline
+\mlcell{1} & \mlcell{1} & \mlcell{'United States'} & \mlcell{18624450} \\ \hline
+\mlcell{2} & \mlcell{2} & \mlcell{'China'} & \mlcell{11221836} \\ \hline
+\mlcell{3} & \mlcell{3} & \mlcell{'Japan'} & \mlcell{4949272} \\ \hline
+\mlcell{4} & \mlcell{4} & \mlcell{'Germany'} & \mlcell{3479232} \\ \hline
+\mlcell{5} & \mlcell{5} & \mlcell{'United Kingdom'} & \mlcell{2660687} \\ \hline
+\mlcell{6} & \mlcell{6} & \mlcell{'France'} & \mlcell{2466472} \\ \hline
+\mlcell{7} & \mlcell{7} & \mlcell{'India'} & \mlcell{2273556} \\ \hline
+\mlcell{8} & \mlcell{8} & \mlcell{'Italy'} & \mlcell{1860152} \\ \hline
+\mlcell{9} & \mlcell{9} & \mlcell{'Brazil'} & \mlcell{1793066} \\ \hline
+\mlcell{10} & \mlcell{10} & \mlcell{'Canada'} & \mlcell{1535768} \\ \hline
+\mlcell{11} & \mlcell{11} & \mlcell{'South Korea'} & \mlcell{1411042} \\ \hline
+\mlcell{12} & \mlcell{12} & \mlcell{'Russia'} & \mlcell{1283286} \\ \hline
+\mlcell{13} & \mlcell{13} & \mlcell{'Australia'} & \mlcell{1264944} \\ \hline
+\mlcell{14} & \mlcell{14} & \mlcell{'Spain'} & \mlcell{1237766} \\ \hline
+\mlcell{15} & \mlcell{15} & \mlcell{'Mexico'} & \mlcell{1076914} \\ \hline
+\mlcell{16} & \mlcell{16} & \mlcell{'Indonesia'} & \mlcell{932445} \\ \hline
+\mlcell{17} & \mlcell{17} & \mlcell{'Turkey'} & \mlcell{863390} \\ \hline
+\mlcell{18} & \mlcell{18} & \mlcell{'Netherlands'} & \mlcell{777548} \\ \hline
+\mlcell{19} & \mlcell{19} & \mlcell{'Saudi Arabia'} & \mlcell{644935} \\ \hline
+\mlcell{20} & \mlcell{20} & \mlcell{' Switzerland'} & \mlcell{640765} \\ \hline
+\mlcell{21} & \mlcell{21} & \mlcell{'Argentina'} & \mlcell{554107} \\ \hline
+\mlcell{22} & \mlcell{22} & \mlcell{'Taiwan'} & \mlcell{530608} \\ \hline
+\mlcell{23} & \mlcell{23} & \mlcell{'Sweden'} & \mlcell{514460} \\ \hline
+\mlcell{24} & \mlcell{24} & \mlcell{'Poland'} & \mlcell{471216} \\ \hline
+\mlcell{25} & \mlcell{25} & \mlcell{'Belgium'} & \mlcell{468148} \\ \hline
+\mlcell{26} & \mlcell{26} & \mlcell{'Thailand'} & \mlcell{411847} \\ \hline
+\mlcell{27} & \mlcell{27} & \mlcell{'Nigeria'} & \mlcell{405442} \\ \hline
+\mlcell{28} & \mlcell{28} & \mlcell{'Iran'} & \mlcell{404447} \\ \hline
+\mlcell{29} & \mlcell{29} & \mlcell{'Austria'} & \mlcell{390961} \\ \hline
+\mlcell{30} & \mlcell{30} & \mlcell{'Norway'} & \mlcell{371064} \\ \hline
+\mlcell{31} & \mlcell{31} & \mlcell{'Israel'} & \mlcell{351748} \\ \hline
+\mlcell{32} & \mlcell{32} & \mlcell{'United Arab Emirates'} & \mlcell{348743} \\ \hline
+\mlcell{33} & \mlcell{33} & \mlcell{'Egypt'} & \mlcell{332484} \\ \hline
+\mlcell{34} & \mlcell{34} & \mlcell{'Hong Kong'} & \mlcell{320881} \\ \hline
+\mlcell{35} & \mlcell{35} & \mlcell{'Denmark'} & \mlcell{306900} \\ \hline
+\mlcell{36} & \mlcell{36} & \mlcell{'Philippines'} & \mlcell{304906} \\ \hline
+\mlcell{37} & \mlcell{37} & \mlcell{'Ireland'} & \mlcell{304499} \\ \hline
+\mlcell{38} & \mlcell{38} & \mlcell{'Singapore'} & \mlcell{296966} \\ \hline
+\mlcell{39} & \mlcell{39} & \mlcell{'Malaysia'} & \mlcell{296536} \\ \hline
+\mlcell{40} & \mlcell{40} & \mlcell{'South Africa'} & \mlcell{295678} \\ \hline
+\mlcell{41} & \mlcell{41} & \mlcell{'Colombia'} & \mlcell{279987} \\ \hline
+\mlcell{42} & \mlcell{42} & \mlcell{'Pakistan'} & \mlcell{278592} \\ \hline
+\mlcell{43} & \mlcell{43} & \mlcell{'Chile'} & \mlcell{250008} \\ \hline
+\mlcell{44} & \mlcell{44} & \mlcell{'Finland'} & \mlcell{238776} \\ \hline
+\mlcell{45} & \mlcell{45} & \mlcell{'Venezuela'} & \mlcell{236116} \\ \hline
+\mlcell{46} & \mlcell{46} & \mlcell{'Bangladesh'} & \mlcell{235623} \\ \hline
+\mlcell{47} & \mlcell{47} & \mlcell{'Portugal'} & \mlcell{205269} \\ \hline
+\mlcell{48} & \mlcell{48} & \mlcell{'Vietnam'} & \mlcell{201309} \\ \hline
+\mlcell{49} & \mlcell{49} & \mlcell{'Peru'} & \mlcell{195432} \\ \hline
+\mlcell{50} & \mlcell{50} & \mlcell{'Czech Republic'} & \mlcell{195305} \\ \hline
+\mlcell{51} & \mlcell{51} & \mlcell{'Greece'} & \mlcell{192770} \\ \hline
+\mlcell{52} & \mlcell{52} & \mlcell{'Romania'} & \mlcell{187807} \\ \hline
+\mlcell{53} & \mlcell{53} & \mlcell{'New Zealand'} & \mlcell{185380} \\ \hline
+\mlcell{54} & \mlcell{54} & \mlcell{'Iraq'} & \mlcell{171716} \\ \hline
+\mlcell{55} & \mlcell{55} & \mlcell{'Algeria'} & \mlcell{159049} \\ \hline
+\mlcell{56} & \mlcell{56} & \mlcell{'Qatar'} & \mlcell{152469} \\ \hline
+\mlcell{57} & \mlcell{57} & \mlcell{'Kazakhstan'} & \mlcell{133668} \\ \hline
+\mlcell{58} & \mlcell{58} & \mlcell{'Hungary'} & \mlcell{129144} \\ \hline
+\mlcell{59} & \mlcell{59} & \mlcell{'Kuwait'} & \mlcell{110873} \\ \hline
+\mlcell{60} & \mlcell{60} & \mlcell{'Puerto Rico'} & \mlcell{105035} \\ \hline
+\mlcell{61} & \mlcell{61} & \mlcell{'Morocco'} & \mlcell{103607} \\ \hline
+\mlcell{62} & \mlcell{62} & \mlcell{'Ecuador'} & \mlcell{98614} \\ \hline
+\mlcell{63} & \mlcell{63} & \mlcell{'Angola'} & \mlcell{95337} \\ \hline
+\mlcell{64} & \mlcell{64} & \mlcell{'Ukraine'} & \mlcell{93263} \\ \hline
+\mlcell{65} & \mlcell{65} & \mlcell{'Slovakia'} & \mlcell{89806} \\ \hline
+\mlcell{66} & \mlcell{66} & \mlcell{'Sri Lanka'} & \mlcell{80978} \\ \hline
+\mlcell{67} & \mlcell{67} & \mlcell{'Ethiopia'} & \mlcell{73151} \\ \hline
+\mlcell{68} & \mlcell{68} & \mlcell{'Dominican Republic'} & \mlcell{71673} \\ \hline
+\mlcell{69} & \mlcell{69} & \mlcell{'Kenya'} & \mlcell{70527} \\ \hline
+\mlcell{70} & \mlcell{70} & \mlcell{'Guatemala'} & \mlcell{68763} \\ \hline
+\mlcell{71} & \mlcell{71} & \mlcell{'Oman'} & \mlcell{66824} \\ \hline
+\mlcell{72} & \mlcell{72} & \mlcell{'Uzbekistan'} & \mlcell{66693} \\ \hline
+\mlcell{73} & \mlcell{73} & \mlcell{'Myanmar'} & \mlcell{63251} \\ \hline
+\mlcell{74} & \mlcell{74} & \mlcell{'Luxembourg'} & \mlcell{58655} \\ \hline
+\mlcell{75} & \mlcell{75} & \mlcell{'Panama'} & \mlcell{57821} \\ \hline
+\mlcell{76} & \mlcell{76} & \mlcell{'Costa Rica'} & \mlcell{57810} \\ \hline
+\mlcell{77} & \mlcell{77} & \mlcell{'Sudan'} & \mlcell{57649} \\ \hline
+\mlcell{78} & \mlcell{78} & \mlcell{'Ghana'} & \mlcell{54989} \\ \hline
+\mlcell{79} & \mlcell{79} & \mlcell{'Bulgaria'} & \mlcell{53236} \\ \hline
+\mlcell{80} & \mlcell{80} & \mlcell{'Uruguay'} & \mlcell{52420} \\ \hline
+\mlcell{81} & \mlcell{81} & \mlcell{'Croatia'} & \mlcell{51350} \\ \hline
+\mlcell{82} & \mlcell{82} & \mlcell{'Lebanon'} & \mlcell{49611} \\ \hline
+\mlcell{83} & \mlcell{83} & \mlcell{'Belarus'} & \mlcell{47703} \\ \hline
+\mlcell{84} & \mlcell{84} & \mlcell{'Tanzania'} & \mlcell{47653} \\ \hline
+\mlcell{85} & \mlcell{85} & \mlcell{'Macau'} & \mlcell{45368} \\ \hline
+\mlcell{86} & \mlcell{86} & \mlcell{'Slovenia'} & \mlcell{44727} \\ \hline
+\mlcell{87} & \mlcell{87} & \mlcell{'Lithuania'} & \mlcell{42791} \\ \hline
+\mlcell{88} & \mlcell{88} & \mlcell{'Tunisia'} & \mlcell{42074} \\ \hline
+\mlcell{89} & \mlcell{89} & \mlcell{'Democratic Republic of the Congo'} & \mlcell{39324} \\ \hline
+\mlcell{90} & \mlcell{90} & \mlcell{'Jordan'} & \mlcell{38709} \\ \hline
+\mlcell{91} & \mlcell{91} & \mlcell{'Serbia'} & \mlcell{38300} \\ \hline
+\mlcell{92} & \mlcell{92} & \mlcell{'Azerbaijan'} & \mlcell{37810} \\ \hline
+\mlcell{93} & \mlcell{93} & \mlcell{'Ivory Coast'} & \mlcell{36375} \\ \hline
+\mlcell{94} & \mlcell{94} & \mlcell{'Turkmenistan'} & \mlcell{36180} \\ \hline
+\mlcell{95} & \mlcell{95} & \mlcell{'Paraguay'} & \mlcell{36054} \\ \hline
+\mlcell{96} & \mlcell{96} & \mlcell{'Bolivia'} & \mlcell{34053} \\ \hline
+\mlcell{97} & \mlcell{97} & \mlcell{'Cameroon'} & \mlcell{32230} \\ \hline
+\mlcell{98} & \mlcell{98} & \mlcell{'Bahrain'} & \mlcell{32176} \\ \hline
+\mlcell{99} & \mlcell{99} & \mlcell{'Latvia'} & \mlcell{27584} \\ \hline
+\mlcell{100} & \mlcell{100} & \mlcell{'El Salvador'} & \mlcell{26798} \\ 
+\hline
+\end{tabular}
+}
+\end{matlabtableoutput}
+
+\matlabheading{Join the Medals Data with the GDP Data}
+
+\begin{par}
+\begin{flushleft}
+We would like to see if there is a relationship between GDP and Olympic success.  To do that, we need to join the medals table with the table that contains the GDP data.  A \textit{join} operation is a way to combine two tables of data using a common key variable -- in this case the country name.  Here we'll use the \textit{\textbf{Join Tables}} Live Editor Task to combine the data.
+\end{flushleft}
+\end{par}
+
+\begin{matlabtableoutput}
+{
+\begin{tabular} {|c|c|c|c|c|c|c|c|c|c|c|}\hline
+\mlcell{ } & \mlcell{Ranking} & \mlcell{Country} & \mlcell{Gold} & \mlcell{Silver} & \mlcell{Bronze} & \mlcell{Total} & \mlcell{Latitude} & \mlcell{Longitude} & \mlcell{Index} & \mlcell{GDP} \\ \hline
+\mlcell{1} & \mlcell{62} & \mlcell{'Algeria'} & \mlcell{0} & \mlcell{2} & \mlcell{0} & \mlcell{2} & \mlcell{36.7529} & \mlcell{3.0420} & \mlcell{55} & \mlcell{159049} \\ \hline
+\mlcell{2} & \mlcell{27} & \mlcell{'Argentina'} & \mlcell{3} & \mlcell{1} & \mlcell{0} & \mlcell{4} & \mlcell{-34.6037} & \mlcell{-58.3816} & \mlcell{21} & \mlcell{554107} \\ \hline
+\mlcell{3} & \mlcell{42} & \mlcell{'Armenia'} & \mlcell{1} & \mlcell{3} & \mlcell{0} & \mlcell{4} & \mlcell{40.1833} & \mlcell{44.5167} & \mlcell{134} & \mlcell{10572} \\ \hline
+\mlcell{4} & \mlcell{10} & \mlcell{'Australia'} & \mlcell{8} & \mlcell{11} & \mlcell{10} & \mlcell{29} & \mlcell{-35.3082} & \mlcell{149.1242} & \mlcell{13} & \mlcell{1264944} \\ \hline
+\mlcell{5} & \mlcell{78} & \mlcell{'Austria'} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{1} & \mlcell{48.2082} & \mlcell{16.3738} & \mlcell{29} & \mlcell{390961} \\ \hline
+\mlcell{6} & \mlcell{39} & \mlcell{'Azerbaijan'} & \mlcell{1} & \mlcell{7} & \mlcell{10} & \mlcell{18} & \mlcell{40.4350} & \mlcell{49.8676} & \mlcell{92} & \mlcell{37810} \\ \hline
+\mlcell{7} & \mlcell{51} & \mlcell{'Bahamas'} & \mlcell{1} & \mlcell{0} & \mlcell{1} & \mlcell{2} & \mlcell{25.0600} & \mlcell{-77.3450} & \mlcell{130} & \mlcell{11262} \\ \hline
+\mlcell{8} & \mlcell{48} & \mlcell{'Bahrain'} & \mlcell{1} & \mlcell{1} & \mlcell{0} & \mlcell{2} & \mlcell{26.2167} & \mlcell{50.5833} & \mlcell{98} & \mlcell{32176} \\ \hline
+\mlcell{9} & \mlcell{40} & \mlcell{'Belarus'} & \mlcell{1} & \mlcell{4} & \mlcell{4} & \mlcell{9} & \mlcell{53.9000} & \mlcell{27.5667} & \mlcell{83} & \mlcell{47703} \\ \hline
+\mlcell{10} & \mlcell{35} & \mlcell{'Belgium'} & \mlcell{2} & \mlcell{2} & \mlcell{2} & \mlcell{6} & \mlcell{50.8503} & \mlcell{4.3517} & \mlcell{25} & \mlcell{468148} \\ \hline
+\mlcell{11} & \mlcell{13} & \mlcell{'Brazil'} & \mlcell{7} & \mlcell{6} & \mlcell{6} & \mlcell{19} & \mlcell{-15.7801} & \mlcell{-47.9292} & \mlcell{9} & \mlcell{1793066} \\ \hline
+\mlcell{12} & \mlcell{65} & \mlcell{'Bulgaria'} & \mlcell{0} & \mlcell{1} & \mlcell{2} & \mlcell{3} & \mlcell{42.6978} & \mlcell{23.3217} & \mlcell{79} & \mlcell{53236} \\ \hline
+\mlcell{13} & \mlcell{69} & \mlcell{'Burundi'} & \mlcell{0} & \mlcell{1} & \mlcell{0} & \mlcell{1} & \mlcell{-3.3762} & \mlcell{29.3593} & \mlcell{162} & \mlcell{3138} \\ \hline
+\mlcell{14} & \mlcell{20} & \mlcell{'Canada'} & \mlcell{4} & \mlcell{3} & \mlcell{15} & \mlcell{22} & \mlcell{45.4215} & \mlcell{-75.6972} & \mlcell{10} & \mlcell{1535768} \\ \hline
+\mlcell{15} & \mlcell{3} & \mlcell{'China'} & \mlcell{26} & \mlcell{18} & \mlcell{26} & \mlcell{70} & \mlcell{39.9040} & \mlcell{116.4075} & \mlcell{2} & \mlcell{11221836} \\ \hline
+\mlcell{16} & \mlcell{17} & \mlcell{'Croatia'} & \mlcell{5} & \mlcell{3} & \mlcell{2} & \mlcell{10} & \mlcell{45.8130} & \mlcell{15.9779} & \mlcell{81} & \mlcell{51350} \\ \hline
+\mlcell{17} & \mlcell{43} & \mlcell{'Czech Republic'} & \mlcell{1} & \mlcell{2} & \mlcell{7} & \mlcell{10} & \mlcell{50.0755} & \mlcell{14.4378} & \mlcell{50} & \mlcell{195305} \\ \hline
+\mlcell{18} & \mlcell{28} & \mlcell{'Denmark'} & \mlcell{2} & \mlcell{6} & \mlcell{7} & \mlcell{15} & \mlcell{55.6761} & \mlcell{12.5683} & \mlcell{35} & \mlcell{306900} \\ \hline
+\mlcell{19} & \mlcell{78} & \mlcell{'Dominican Republic'} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{1} & \mlcell{18.5000} & \mlcell{-69.9833} & \mlcell{68} & \mlcell{71673} \\ \hline
+\mlcell{20} & \mlcell{75} & \mlcell{'Egypt'} & \mlcell{0} & \mlcell{0} & \mlcell{3} & \mlcell{3} & \mlcell{30.0444} & \mlcell{31.2357} & \mlcell{33} & \mlcell{332484} \\ \hline
+\mlcell{21} & \mlcell{78} & \mlcell{'Estonia'} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{1} & \mlcell{59.4370} & \mlcell{24.7536} & \mlcell{102} & \mlcell{23348} \\ \hline
+\mlcell{22} & \mlcell{44} & \mlcell{'Ethiopia'} & \mlcell{1} & \mlcell{2} & \mlcell{5} & \mlcell{8} & \mlcell{9.0227} & \mlcell{38.7468} & \mlcell{67} & \mlcell{73151} \\ \hline
+\mlcell{23} & \mlcell{54} & \mlcell{'Fiji'} & \mlcell{1} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{-18.1416} & \mlcell{178.4419} & \mlcell{153} & \mlcell{4666} \\ \hline
+\mlcell{24} & \mlcell{78} & \mlcell{'Finland'} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{1} & \mlcell{60.1698} & \mlcell{24.9386} & \mlcell{44} & \mlcell{238776} \\ \hline
+\mlcell{25} & \mlcell{7} & \mlcell{'France'} & \mlcell{10} & \mlcell{18} & \mlcell{14} & \mlcell{42} & \mlcell{48.8566} & \mlcell{2.3522} & \mlcell{6} & \mlcell{2466472} \\ \hline
+\mlcell{26} & \mlcell{38} & \mlcell{'Georgia'} & \mlcell{2} & \mlcell{1} & \mlcell{4} & \mlcell{7} & \mlcell{41.7100} & \mlcell{44.7930} & \mlcell{119} & \mlcell{14330} \\ \hline
+\mlcell{27} & \mlcell{5} & \mlcell{'Germany'} & \mlcell{17} & \mlcell{10} & \mlcell{15} & \mlcell{42} & \mlcell{52.5192} & \mlcell{13.4061} & \mlcell{4} & \mlcell{3479232} \\ \hline
+\mlcell{28} & \mlcell{26} & \mlcell{'Greece'} & \mlcell{3} & \mlcell{1} & \mlcell{2} & \mlcell{6} & \mlcell{37.9837} & \mlcell{23.7293} & \mlcell{51} & \mlcell{192770} \\ \hline
+\mlcell{29} & \mlcell{69} & \mlcell{'Grenada'} & \mlcell{0} & \mlcell{1} & \mlcell{0} & \mlcell{1} & \mlcell{12.0535} & \mlcell{-61.7497} & \mlcell{177} & \mlcell{1056} \\ \hline
+\mlcell{30} & \mlcell{12} & \mlcell{'Hungary'} & \mlcell{8} & \mlcell{3} & \mlcell{4} & \mlcell{15} & \mlcell{47.4979} & \mlcell{19.0402} & \mlcell{58} & \mlcell{129144} \\ \hline
+\mlcell{31} & \mlcell{67} & \mlcell{'India'} & \mlcell{0} & \mlcell{1} & \mlcell{1} & \mlcell{2} & \mlcell{28.6353} & \mlcell{77.2250} & \mlcell{7} & \mlcell{2273556} \\ \hline
+\mlcell{32} & \mlcell{46} & \mlcell{'Indonesia'} & \mlcell{1} & \mlcell{2} & \mlcell{0} & \mlcell{3} & \mlcell{-6.2115} & \mlcell{106.8452} & \mlcell{16} & \mlcell{932445} \\ \hline
+\mlcell{33} & \mlcell{25} & \mlcell{'Iran'} & \mlcell{3} & \mlcell{1} & \mlcell{4} & \mlcell{8} & \mlcell{35.6962} & \mlcell{51.4229} & \mlcell{28} & \mlcell{404447} \\ \hline
+\mlcell{34} & \mlcell{62} & \mlcell{'Ireland'} & \mlcell{0} & \mlcell{2} & \mlcell{0} & \mlcell{2} & \mlcell{53.3498} & \mlcell{-6.2603} & \mlcell{37} & \mlcell{304499} \\ \hline
+\mlcell{35} & \mlcell{77} & \mlcell{'Israel'} & \mlcell{0} & \mlcell{0} & \mlcell{2} & \mlcell{2} & \mlcell{31.7683} & \mlcell{35.2137} & \mlcell{31} & \mlcell{351748} \\ \hline
+\mlcell{36} & \mlcell{9} & \mlcell{'Italy'} & \mlcell{8} & \mlcell{12} & \mlcell{8} & \mlcell{28} & \mlcell{41.8929} & \mlcell{12.4825} & \mlcell{8} & \mlcell{1860152} \\ \hline
+\mlcell{37} & \mlcell{51} & \mlcell{'Ivory Coast'} & \mlcell{1} & \mlcell{0} & \mlcell{1} & \mlcell{2} & \mlcell{6.8167} & \mlcell{-5.2833} & \mlcell{93} & \mlcell{36375} \\ \hline
+\mlcell{38} & \mlcell{16} & \mlcell{'Jamaica'} & \mlcell{6} & \mlcell{3} & \mlcell{2} & \mlcell{11} & \mlcell{17.9927} & \mlcell{-76.7920} & \mlcell{122} & \mlcell{14002} \\ \hline
+\mlcell{39} & \mlcell{6} & \mlcell{'Japan'} & \mlcell{12} & \mlcell{8} & \mlcell{21} & \mlcell{41} & \mlcell{35.6896} & \mlcell{139.6917} & \mlcell{3} & \mlcell{4949272} \\ \hline
+\mlcell{40} & \mlcell{54} & \mlcell{'Jordan'} & \mlcell{1} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{31.9566} & \mlcell{35.9457} & \mlcell{90} & \mlcell{38709} \\ \hline
+\mlcell{41} & \mlcell{22} & \mlcell{'Kazakhstan'} & \mlcell{3} & \mlcell{5} & \mlcell{9} & \mlcell{17} & \mlcell{51.1667} & \mlcell{71.4333} & \mlcell{57} & \mlcell{133668} \\ \hline
+\mlcell{42} & \mlcell{15} & \mlcell{'Kenya'} & \mlcell{6} & \mlcell{6} & \mlcell{1} & \mlcell{13} & \mlcell{-1.2921} & \mlcell{36.8219} & \mlcell{69} & \mlcell{70527} \\ \hline
+\mlcell{43} & \mlcell{54} & \mlcell{'Kosovo'} & \mlcell{1} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{42.6724} & \mlcell{21.1645} & \mlcell{147} & \mlcell{6717} \\ \hline
+\mlcell{44} & \mlcell{64} & \mlcell{'Lithuania'} & \mlcell{0} & \mlcell{1} & \mlcell{3} & \mlcell{4} & \mlcell{54.6872} & \mlcell{25.2797} & \mlcell{87} & \mlcell{42791} \\ \hline
+\mlcell{45} & \mlcell{60} & \mlcell{'Malaysia'} & \mlcell{0} & \mlcell{4} & \mlcell{1} & \mlcell{5} & \mlcell{3.1390} & \mlcell{101.6869} & \mlcell{39} & \mlcell{296536} \\ \hline
+\mlcell{46} & \mlcell{61} & \mlcell{'Mexico'} & \mlcell{0} & \mlcell{3} & \mlcell{2} & \mlcell{5} & \mlcell{19.4326} & \mlcell{-99.1332} & \mlcell{15} & \mlcell{1076914} \\ \hline
+\mlcell{47} & \mlcell{78} & \mlcell{'Moldova'} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{1} & \mlcell{47.0269} & \mlcell{28.8416} & \mlcell{146} & \mlcell{6773} \\ \hline
+\mlcell{48} & \mlcell{67} & \mlcell{'Mongolia'} & \mlcell{0} & \mlcell{1} & \mlcell{1} & \mlcell{2} & \mlcell{47.9214} & \mlcell{106.9055} & \mlcell{131} & \mlcell{11053} \\ \hline
+\mlcell{49} & \mlcell{78} & \mlcell{'Morocco'} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{1} & \mlcell{34.0150} & \mlcell{-6.8327} & \mlcell{61} & \mlcell{103607} \\ \hline
+\mlcell{50} & \mlcell{11} & \mlcell{'Netherlands'} & \mlcell{8} & \mlcell{7} & \mlcell{4} & \mlcell{19} & \mlcell{52.3702} & \mlcell{4.8952} & \mlcell{18} & \mlcell{777548} \\ \hline
+\mlcell{51} & \mlcell{19} & \mlcell{'New Zealand'} & \mlcell{4} & \mlcell{9} & \mlcell{5} & \mlcell{18} & \mlcell{-41.2865} & \mlcell{174.7762} & \mlcell{53} & \mlcell{185380} \\ \hline
+\mlcell{52} & \mlcell{69} & \mlcell{'Niger'} & \mlcell{0} & \mlcell{1} & \mlcell{0} & \mlcell{1} & \mlcell{13.5127} & \mlcell{2.1125} & \mlcell{143} & \mlcell{7531} \\ \hline
+\mlcell{53} & \mlcell{78} & \mlcell{'Nigeria'} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{1} & \mlcell{9.0667} & \mlcell{7.4833} & \mlcell{27} & \mlcell{405442} \\ \hline
+\mlcell{54} & \mlcell{74} & \mlcell{'Norway'} & \mlcell{0} & \mlcell{0} & \mlcell{4} & \mlcell{4} & \mlcell{59.9139} & \mlcell{10.7522} & \mlcell{30} & \mlcell{371064} \\ \hline
+\mlcell{55} & \mlcell{69} & \mlcell{'Philippines'} & \mlcell{0} & \mlcell{1} & \mlcell{0} & \mlcell{1} & \mlcell{14.5995} & \mlcell{120.9842} & \mlcell{36} & \mlcell{304906} \\ \hline
+\mlcell{56} & \mlcell{33} & \mlcell{'Poland'} & \mlcell{2} & \mlcell{3} & \mlcell{6} & \mlcell{11} & \mlcell{52.2297} & \mlcell{21.0122} & \mlcell{24} & \mlcell{471216} \\ \hline
+\mlcell{57} & \mlcell{78} & \mlcell{'Portugal'} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{1} & \mlcell{38.7253} & \mlcell{-9.1500} & \mlcell{47} & \mlcell{205269} \\ \hline
+\mlcell{58} & \mlcell{54} & \mlcell{'Puerto Rico'} & \mlcell{1} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{18.2002} & \mlcell{-66.6645} & \mlcell{60} & \mlcell{105035} \\ \hline
+\mlcell{59} & \mlcell{69} & \mlcell{'Qatar'} & \mlcell{0} & \mlcell{1} & \mlcell{0} & \mlcell{1} & \mlcell{25.2803} & \mlcell{51.5225} & \mlcell{56} & \mlcell{152469} \\ \hline
+\mlcell{60} & \mlcell{47} & \mlcell{'Romania'} & \mlcell{1} & \mlcell{1} & \mlcell{3} & \mlcell{5} & \mlcell{44.4325} & \mlcell{26.1039} & \mlcell{52} & \mlcell{187807} \\ \hline
+\mlcell{61} & \mlcell{4} & \mlcell{'Russia'} & \mlcell{19} & \mlcell{18} & \mlcell{19} & \mlcell{56} & \mlcell{55.7512} & \mlcell{37.6184} & \mlcell{12} & \mlcell{1283286} \\ \hline
+\mlcell{62} & \mlcell{32} & \mlcell{'Serbia'} & \mlcell{2} & \mlcell{4} & \mlcell{2} & \mlcell{8} & \mlcell{44.8206} & \mlcell{20.4622} & \mlcell{91} & \mlcell{38300} \\ \hline
+\mlcell{63} & \mlcell{54} & \mlcell{'Singapore'} & \mlcell{1} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{1.2801} & \mlcell{103.8509} & \mlcell{38} & \mlcell{296966} \\ \hline
+\mlcell{64} & \mlcell{37} & \mlcell{'Slovakia'} & \mlcell{2} & \mlcell{2} & \mlcell{0} & \mlcell{4} & \mlcell{48.1459} & \mlcell{17.1071} & \mlcell{65} & \mlcell{89806} \\ \hline
+\mlcell{65} & \mlcell{45} & \mlcell{'Slovenia'} & \mlcell{1} & \mlcell{2} & \mlcell{1} & \mlcell{4} & \mlcell{46.0565} & \mlcell{14.5081} & \mlcell{86} & \mlcell{44727} \\ \hline
+\mlcell{66} & \mlcell{30} & \mlcell{'South Africa'} & \mlcell{2} & \mlcell{6} & \mlcell{2} & \mlcell{10} & \mlcell{-25.7313} & \mlcell{28.2184} & \mlcell{40} & \mlcell{295678} \\ \hline
+\mlcell{67} & \mlcell{14} & \mlcell{'Spain'} & \mlcell{7} & \mlcell{4} & \mlcell{6} & \mlcell{17} & \mlcell{40.4168} & \mlcell{-3.7038} & \mlcell{14} & \mlcell{1237766} \\ \hline
+\mlcell{68} & \mlcell{29} & \mlcell{'Sweden'} & \mlcell{2} & \mlcell{6} & \mlcell{3} & \mlcell{11} & \mlcell{59.3289} & \mlcell{18.0649} & \mlcell{23} & \mlcell{514460} \\ \hline
+\mlcell{69} & \mlcell{50} & \mlcell{'Taiwan'} & \mlcell{1} & \mlcell{0} & \mlcell{2} & \mlcell{3} & \mlcell{25.0911} & \mlcell{121.5598} & \mlcell{22} & \mlcell{530608} \\ \hline
+\mlcell{70} & \mlcell{54} & \mlcell{'Tajikistan'} & \mlcell{1} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{38.5367} & \mlcell{68.7800} & \mlcell{144} & \mlcell{6953} \\ \hline
+\mlcell{71} & \mlcell{35} & \mlcell{'Thailand'} & \mlcell{2} & \mlcell{2} & \mlcell{2} & \mlcell{6} & \mlcell{13.7279} & \mlcell{100.5241} & \mlcell{26} & \mlcell{411847} \\ \hline
+\mlcell{72} & \mlcell{75} & \mlcell{'Tunisia'} & \mlcell{0} & \mlcell{0} & \mlcell{3} & \mlcell{3} & \mlcell{36.8188} & \mlcell{10.1660} & \mlcell{88} & \mlcell{42074} \\ \hline
+\mlcell{73} & \mlcell{41} & \mlcell{'Turkey'} & \mlcell{1} & \mlcell{3} & \mlcell{4} & \mlcell{8} & \mlcell{39.9208} & \mlcell{32.8541} & \mlcell{17} & \mlcell{863390} \\ \hline
+\mlcell{74} & \mlcell{31} & \mlcell{'Ukraine'} & \mlcell{2} & \mlcell{5} & \mlcell{4} & \mlcell{11} & \mlcell{50.4501} & \mlcell{30.5234} & \mlcell{64} & \mlcell{93263} \\ \hline
+\mlcell{75} & \mlcell{78} & \mlcell{'United Arab Emirates'} & \mlcell{0} & \mlcell{0} & \mlcell{1} & \mlcell{1} & \mlcell{24.4667} & \mlcell{54.3667} & \mlcell{32} & \mlcell{348743} \\ \hline
+\mlcell{76} & \mlcell{2} & \mlcell{'United Kingdom'} & \mlcell{27} & \mlcell{23} & \mlcell{17} & \mlcell{67} & \mlcell{51.5112} & \mlcell{-0.1198} & \mlcell{5} & \mlcell{2660687} \\ \hline
+\mlcell{77} & \mlcell{1} & \mlcell{'United States'} & \mlcell{46} & \mlcell{37} & \mlcell{38} & \mlcell{121} & \mlcell{38.8951} & \mlcell{-77.0364} & \mlcell{1} & \mlcell{18624450} \\ \hline
+\mlcell{78} & \mlcell{21} & \mlcell{'Uzbekistan'} & \mlcell{4} & \mlcell{2} & \mlcell{7} & \mlcell{13} & \mlcell{41.2667} & \mlcell{69.2167} & \mlcell{72} & \mlcell{66693} \\ \hline
+\mlcell{79} & \mlcell{65} & \mlcell{'Venezuela'} & \mlcell{0} & \mlcell{1} & \mlcell{2} & \mlcell{3} & \mlcell{10.4910} & \mlcell{-66.9021} & \mlcell{45} & \mlcell{236116} \\ \hline
+\mlcell{80} & \mlcell{48} & \mlcell{'Vietnam'} & \mlcell{1} & \mlcell{1} & \mlcell{0} & \mlcell{2} & \mlcell{21.0333} & \mlcell{105.8500} & \mlcell{48} & \mlcell{201309} \\ 
+\hline
+\end{tabular}
+}
+\end{matlabtableoutput}
+
+\matlabheading{Plot Olympic Medals vs. GDP}
+
+\begin{par}
+\begin{flushleft}
+The last step is to plot the number of medals won against GDP for each country.  We can see that countries with high GDP tend to do better in the Olympics maybe because they have more resources to spend on their athletes.
+\end{flushleft}
+\end{par}
+
+\begin{center}
+\includegraphics[width=\maxwidth{101.15403913697943em}]{figure_1.eps}
+\end{center}
+\begin{par}
+\begin{flushleft}
+Copyright (c) 2019, The MathWorks, Inc.
+\end{flushleft}
+\end{par}
+
+
+\matlabheading{Attribution}
+
+\begin{par}
+\begin{flushleft}
+This example uses Olympic medal data from the Wikipedia article \href{https://en.wikipedia.org/wiki/2016_Summer_Olympics_medal_table}{2016\_Summer\_Olympics\_medal\_table} which is released under the \href{https://creativecommons.org/licenses/by-sa/3.0/}{Creative Commons Attribution-Share-Alike License 3.0}.  It also uses 2016 GDP data from the Wikipedia article \href{https://en.wikipedia.org/wiki/List_of_countries_by_past_and_projected_GDP_(nominal)}{List\_of\_countries\_by\_past\_and\_projected\_GDP\_(nominal)} which is released under the \href{https://creativecommons.org/licenses/by-sa/3.0/}{Creative Commons Attribution-Share-Alike License 3.0}.
+\end{flushleft}
+\end{par}
+
+\end{document}
